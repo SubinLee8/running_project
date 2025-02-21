@@ -98,6 +98,9 @@
 
                         <c:url var="calendarListPage" value="/teampage/${teamId}/tcalendar/list" />
                         <a href="${calendarListPage}" class="btn custom-btn">팀 일정 게시판</a>
+                        
+                        <c:url var="chatPage" value="/teampage/${teamId}/chat" />
+						<a href="${chatPage}" class="btn custom-btn">채팅방</a>
                     </div>
 
                     <h2 class="text-center mt-5">팀 게시판</h2>

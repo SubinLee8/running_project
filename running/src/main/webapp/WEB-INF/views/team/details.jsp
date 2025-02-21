@@ -105,6 +105,10 @@
 								value="/teampage/${teamItemDto.teamId}/tcalendar/list" />
 							<a href="${calendarListPage}" class="btn btn-success mx-2">팀
 								일정게시판</a>
+							
+							<c:url var="chattingPage"
+								value="/teampage/${teamItemDto.teamId}/chat" />
+							<a href="${chattingPage}" class="btn btn-success mx-2">팀 채팅방</a>
 
 						</div>
 					</div>

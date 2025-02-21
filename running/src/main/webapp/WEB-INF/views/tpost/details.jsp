@@ -19,20 +19,20 @@
 	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
 	crossorigin="anonymous">
 <style>
-		/* 내팀으로, 팀게시판, 팀앨범, 팀일정게시판 버튼 */
-		.custom-btn {
-		    background-color: transparent;
-		    border: 2px solid #008C2C;
-		    color: #008C2C;
-		    transition: background-color 0.3s, color 0.3s;
-		}
-		
-		.custom-btn:hover, .custom-btn:focus, .custom-btn.active {
-		    background-color: #008C2C;
-		    color: white;
-		    border-color: #008C2C;
-		}
-		</style>
+/* 내팀으로, 팀게시판, 팀앨범, 팀일정게시판 버튼 */
+.custom-btn {
+	background-color: transparent;
+	border: 2px solid #008C2C;
+	color: #008C2C;
+	transition: background-color 0.3s, color 0.3s;
+}
+
+.custom-btn:hover, .custom-btn:focus, .custom-btn.active {
+	background-color: #008C2C;
+	color: white;
+	border-color: #008C2C;
+}
+</style>
 
 </head>
 <body>
@@ -53,17 +53,17 @@
 						<a href="${teamPage}" class="btn custom-btn">내 팀으로</a>
 
 						<c:url var="postListPage" value="/teampage/${teamId}/post/list" />
-						<a href="${postListPage}" class="btn custom-btn">팀
-							게시판</a>
+						<a href="${postListPage}" class="btn custom-btn">팀 게시판</a>
 
 						<c:url var="imageListPage" value="/teampage/${teamId}/image/list" />
-						<a href="${imageListPage}" class="btn custom-btn">팀
-							앨범</a>
+						<a href="${imageListPage}" class="btn custom-btn">팀 앨범</a>
 
 						<c:url var="calendarListPage"
 							value="/teampage/${teamId}/tcalendar/list" />
-						<a href="${calendarListPage}" class="btn custom-btn">팀
-							일정</a>
+						<a href="${calendarListPage}" class="btn custom-btn">팀 일정</a>
+
+						<c:url var="chatPage" value="/teampage/${teamId}/chat" />
+						<a href="${chatPage}" class="btn custom-btn">채팅방</a>
 					</div>
 
 					<!-- 작성자 정보 -->

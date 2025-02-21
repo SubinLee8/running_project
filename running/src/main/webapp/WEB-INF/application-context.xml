@@ -19,8 +19,8 @@
 
 		<property name="jdbcUrl"
 			value="jdbc:oracle:thin:@localhost:1521:xe" />
-		<property name="username" value="scott" />
-		<property name="password" value="tiger" />
+		<property name="username" value="run" />
+		<property name="password" value="run" />
 
 <!-- 		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe" /> -->
 <!-- 		<property name="username" value="run2" /> -->
