@@ -125,7 +125,7 @@
                                     <!-- 이메일 입력 + 중복 체크 결과 -->
                                     <div class="col-md-12">
                                         <label class="form-label fw-bold">이메일</label>
-                                        <input type="text" id="email" name="email" value="${user.email}"
+                                        <input disabled type="text" id="email" name="email" value="${user.email}"
                                                class="form-control border-success shadow-sm">
                                         <div id="checkEmailResult" class="mt-1 text-danger"></div>
                                     </div>

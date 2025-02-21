@@ -22,9 +22,10 @@
 		<property name="username" value="run" />
 		<property name="password" value="run" />
 
-<!-- 		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe" /> -->
-<!-- 		<property name="username" value="run2" /> -->
-<!-- 		<property name="password" value="run2" /> -->
+		<!-- <property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe" 
+			/> -->
+		<!-- <property name="username" value="run2" /> -->
+		<!-- <property name="password" value="run2" /> -->
 	</bean>
 
 	<!-- HikariDataSource bean 생성을 위한 설정 -->
@@ -69,11 +70,33 @@
 
 		<property name="javaMailProperties">
 			<props>
-            <prop key="mail.smtp.auth">true</prop>
-            <prop key="mail.smtp.starttls.enable">true</prop>
-            <prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
-            <prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
-        </props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+				<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+			</props>
 		</property>
 	</bean>
+
+	<!-- Redis Bean 등록 -->
+	<bean id="redisConnectionFactory"
+		class="org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory">
+		<property name="hostName" value="localhost" />  <!-- Docker에서 실행 중이므로 localhost 사용 -->
+		<property name="port" value="6379" />
+	</bean>
+
+	<bean id="redisTemplate"
+		class="org.springframework.data.redis.core.RedisTemplate">
+		<property name="connectionFactory"
+			ref="redisConnectionFactory" />
+		<property name="keySerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="valueSerializer">
+			<bean
+				class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+	</bean>
+
 </beans>

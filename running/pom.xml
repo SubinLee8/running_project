@@ -246,11 +246,27 @@
     		<version>${spring-version}</version> 
 		</dependency>
 		
+		<!--메세징-->
 		<dependency>
     		<groupId>org.springframework</groupId>
     		<artifactId>spring-messaging</artifactId>
     		<version>${spring-version}</version> 
 		</dependency>
+		
+		<!--redis-->
+		<dependency>
+    		<groupId>org.springframework.data</groupId>
+    		<artifactId>spring-data-redis</artifactId>
+   		    <version>3.4.3</version> 
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/io.lettuce/lettuce-core -->
+		<dependency>
+    		<groupId>io.lettuce</groupId>
+    		<artifactId>lettuce-core</artifactId>
+    		<version>6.5.4.RELEASE</version>
+		</dependency>
+
 
 
 	</dependencies>

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.http.HttpResponse;
 
+import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.itwill.running.service.RedisService;
 import com.itwill.running.service.TMemberService;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -22,12 +24,14 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class ChatController {
 	private final TMemberService memberService;
+	private final RedisService redisService;
+	
 
 	@MessageMapping("/chat/{teamId}")
 	@SendTo("/topic/team/{teamId}")
 	public String sendMessageToTeam(@DestinationVariable String teamId, String message) {
 		// 팀별 메시지 전송 (teamId로 그룹화)
-		return message;
+		return message;  
 	}
 
 	@GetMapping("/teampage/{teamId}/chat")
@@ -41,4 +45,6 @@ public class ChatController {
 		model.addAttribute("teamId", teamId);
 		return "tchat/chattingroom";
 	}
+	
+	
 }

@@ -42,13 +42,14 @@
 .chat-box {
 	width: 100%;
 	max-width: 600px; /* 채팅 박스 최대 너비 설정 */
-	min-height: 300px;
+	height: 500px; /* 채팅창 높이 고정 */
 	border: 1px solid #ccc;
 	padding: 15px;
 	border-radius: 10px;
 	background: #f8f9fa;
-	overflow-y: auto;
+	overflow-y: auto; /* 스크롤 가능 */
 }
+
 
 .input-group {
 	max-width: 600px; /* 입력 필드의 최대 너비 설정 */
@@ -109,7 +110,8 @@
 					<div class="chat-container">
 
 						<!-- 채팅 메시지 표시 영역 -->
-						<div id="chatBox" class="chat-box d-flex flex-column"></div>
+						<div id="chatBox" class="chat-box d-flex flex-column p-3"></div>
+
 
 						<!-- 메시지 입력 & 버튼 -->
 						<div class="input-group mt-3">

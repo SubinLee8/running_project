@@ -6,8 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// WebSocket 오브젝트 생성 (자동으로 접속 시작한다. - onopen 함수 호출)      
 	var webSocket = new WebSocket("/running/websocket?teamId=" + teamId);
-	// 콘솔 텍스트 에리어 오브젝트      
-	var messageTextArea = document.getElementById("messageTextArea");
+	// 콘솔 텍스트 에리어 오브젝트 
 	var message = document.getElementById("textMessage");
 	//전송버튼
 	const submitButton = document.querySelector("button#submitButton");
@@ -19,25 +18,69 @@ document.addEventListener('DOMContentLoaded', () => {
 	const now = new Date();
 	const timeString = now.toLocaleTimeString();
 
+	window.addEventListener('beforeunload', (event) => {
+		if (webSocket && webSocket.readyState === WebSocket.OPEN) {
+			console.log('ready');
+			webSocket.close();
+		}
+	});
+
+
+	message.addEventListener("keypress", function(event) {
+		if (event.key === "Enter") { // 엔터 키 감지
+			submitButton.click(); // 전송 버튼 클릭 실행
+		}
+	});
+
 	// WebSocket 서버와 접속이 되면 호출되는 함수      
 	webSocket.onopen = function(event) {
-		// 콘솔 텍스트에 메시지를 출력한다.        
-		messageTextArea.value += "Server connect...\n";
+		//var messageFormat = {
+		//timestamp: timeString, // 보낸 시간 (ISO 형식)
+		//teamId: teamId, // 팀 ID
+		//messageContent: `${signedInUserNickname} 입장` // 메시지 내용
+		//};
+		// 객체를 JSON 문자열로 변환
+		//var messageJson = JSON.stringify(messageFormat);
+
+		//웹소켓 서버에 전송
+		//webSocket.send(messageJson);
 	};
 	// WebSocket 서버와 접속이 끊기면 호출되는 함수      
 	webSocket.onclose = function(message) {
-		// 콘솔 텍스트에 메시지를 출력한다.        
-		messageTextArea.value += "Server Disconnect...\n";
+		var messageFormat = {
+			timestamp: timeString, // 보낸 시간 (ISO 형식)
+			teamId: teamId, // 팀 ID
+			messageContent: `${signedInUserNickname} 퇴장` // 메시지 내용
+		};
+		// 객체를 JSON 문자열로 변환
+		var messageJson = JSON.stringify(messageFormat);
+
+		//웹소켓 서버에 전송
+		webSocket.send(messageJson);
 	};
 	// WebSocket 서버와 통신 중에 에러가 발생하면 요청되는 함수      
 	webSocket.onerror = function(message) {
 		// 콘솔 텍스트에 메시지를 출력한다.        
-		messageTextArea.value += "에러...\n";
+		const messageDiv = document.createElement("div");
+		messageDiv.classList.add("message");
+		messageDiv.innerHTML = `에러...`;
+		chatBox.appendChild(messageDiv);
 	};
 
 	// WebSocket 서버로 부터 메시지가 오면 호출되는 함수      
 	webSocket.onmessage = function(message) {
 		const msg = JSON.parse(message.data);
+
+		if (msg.nickname == null) {
+			// 콘솔 텍스트에 메시지를 출력한다.        
+			const alertDiv = document.createElement("div");
+			alertDiv.classList.add("text-success");
+			alertDiv.innerHTML = `
+				<div>${msg.messageContent}</div>
+				<div class="meta">${msg.timestamp}</div>`;
+			chatBox.appendChild(alertDiv);
+			return;
+		}
 
 		// 콘솔 텍스트에 메시지를 출력한다.        
 		const messageDiv = document.createElement("div");
@@ -51,14 +94,14 @@ document.addEventListener('DOMContentLoaded', () => {
 	<div>${msg.messageContent}</div>
 	<div class="meta">${msg.timestamp}</div>`;
 		chatBox.appendChild(messageDiv);
-
+		scrollToBottom();
 	};
 
 	// Send 버튼을 누르면 호출되는 함수    
 	function sendMessage() {
-		if(message.value==''){
+		if (message.value == '') {
 			return;
-		}  
+		}
 
 		// 사용자 정보와 메시지를 포함하는 객체 생성
 		var messageFormat = {
@@ -78,9 +121,14 @@ document.addEventListener('DOMContentLoaded', () => {
 		message.value = "";
 	}
 
-	// Disconnect 버튼을 누르면 호출되는 함수    
-	function disconnect() {
-		// WebSocket 접속 해제      
-		webSocket.close();
+	function scrollToBottom() {
+		var chatBox = document.getElementById('chatBox');
+		chatBox.scrollTop = chatBox.scrollHeight;
 	}
+
+	// Disconnect 버튼을 누르면 호출되는 함수    
+	//function disconnect() {
+	// WebSocket 접속 해제      
+	//webSocket.close();
+	//}
 })
