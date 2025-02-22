@@ -4,7 +4,7 @@
 <h4>3 weeks Team Project with Spring MVC Architecture </h4>
 <div>Language - Java, Sql </br>
 Server - Tomcat  </br>
-DB - Oracle  </br>
+DB - Oracle, Redis  </br>
 IDE - Eclipse, SqlDeveloper  </br>
 Library - jakarta.servlet-api, jakarta.servlet.jsp.jstl-api, myBatis, JUnit, Log4j, HikariCP, Jackson Data Bind, commons-fileupload, javax.mail, etc </div>
 
@@ -32,6 +32,7 @@ Library - jakarta.servlet-api, jakarta.servlet.jsp.jstl-api, myBatis, JUnit, Log
 5️⃣ Team Community </br>
 -Team-exclusive boards: General/Album/Schedule (only the team leader can post in the schedule board, and each event has a participant number limit). Team members can post in general and album boards, with pagination. </br>
 -Real-time chat feature for team members. </br>
+-View the Latest 100 Chat Messages </br>
 -Comments/Replies: Only team members can post. </br>
 -If a comment with replies is deleted, only the content and user information are removed, while the comment remains. </br>
  </br>
