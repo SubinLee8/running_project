@@ -44,19 +44,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		//웹소켓 서버에 전송
 		//webSocket.send(messageJson);
+
+		axios.get(`../api/chat/getAll?teamid=${teamId}`).then((response) => {
+			console.log(response.data);
+			if (response.data != null) {
+				getRecentMessages(response.data);
+			}
+		}).catch((error) => {
+			console.log(error);
+		})
 	};
+
+	function getRecentMessages(data) {
+		console.log(data);
+		for (const msg of data) {
+			const messageDiv = document.createElement("div");
+			if (msg.nickname == signedInUserNickname) {
+				messageDiv.classList.add("message", "user");
+			}
+			else {
+				messageDiv.classList.add("message", "other");
+			}
+			messageDiv.innerHTML = `<div><strong>${msg.nickname}</strong></div>
+				<div>${msg.messageContent}</div>
+				<div class="meta">${msg.timestamp}</div>`;
+			chatBox.appendChild(messageDiv);
+		}
+		scrollToBottom();
+
+	}
+
+
 	// WebSocket 서버와 접속이 끊기면 호출되는 함수      
 	webSocket.onclose = function(message) {
-		var messageFormat = {
-			timestamp: timeString, // 보낸 시간 (ISO 형식)
-			teamId: teamId, // 팀 ID
-			messageContent: `${signedInUserNickname} 퇴장` // 메시지 내용
-		};
+		//var messageFormat = {
+		//timestamp: timeString, // 보낸 시간 (ISO 형식)
+		//teamId: teamId, // 팀 ID
+		//messageContent: `${signedInUserNickname} 퇴장` // 메시지 내용
+		//};
 		// 객체를 JSON 문자열로 변환
-		var messageJson = JSON.stringify(messageFormat);
+		//var messageJson = JSON.stringify(messageFormat);
 
 		//웹소켓 서버에 전송
-		webSocket.send(messageJson);
+		//webSocket.send(messageJson);
 	};
 	// WebSocket 서버와 통신 중에 에러가 발생하면 요청되는 함수      
 	webSocket.onerror = function(message) {
@@ -115,10 +145,15 @@ document.addEventListener('DOMContentLoaded', () => {
 		// 객체를 JSON 문자열로 변환
 		var messageJson = JSON.stringify(messageFormat);
 
-		//웹소켓 서버에 전송
-		webSocket.send(messageJson);
-		// 송신 메시지를 작성하는 텍스트 박스를 초기화한다.  
-		message.value = "";
+		//Redis 저장
+		axios.post(`../api/chat?teamid=${teamId}`, messageFormat).then((response) => {
+			//웹소켓 서버에 전송
+			webSocket.send(messageJson);
+			// 송신 메시지를 작성하는 텍스트 박스를 초기화한다.  
+			message.value = "";
+		}).catch((error) => {
+			console.log('error');
+		})
 	}
 
 	function scrollToBottom() {

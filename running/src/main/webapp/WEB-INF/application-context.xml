@@ -19,8 +19,8 @@
 
 		<property name="jdbcUrl"
 			value="jdbc:oracle:thin:@localhost:1521:xe" />
-		<property name="username" value="run" />
-		<property name="password" value="run" />
+		<property name="username" value="scott" />
+		<property name="password" value="tiger" />
 
 		<!-- <property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe" 
 			/> -->
@@ -98,5 +98,9 @@
 				class="org.springframework.data.redis.serializer.StringRedisSerializer" />
 		</property>
 	</bean>
+	
+	<bean id="objectMapper"
+		class="com.fasterxml.jackson.databind.ObjectMapper" />
+
 
 </beans>

@@ -14,8 +14,8 @@ public class RedisServiceTest {
 
 	//@Test
 	public void testRedis() {
-		redisService.saveData("testKey2", "WHATIF?");
-		System.out.println(redisService.getData("testKey")); // "Hello Redis!"
+		//redisService.saveData("testKey2", "WHATIF?");
+		//System.out.println(redisService.getData("testKey")); // "Hello Redis!"
 	}
 
 }

@@ -3,8 +3,10 @@ package com.itwill.running.web;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.http.HttpResponse;
+import java.util.List;
 
 import org.springframework.data.redis.serializer.RedisSerializationContext;
+import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -12,7 +14,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.itwill.running.dto.ChatMessageDto;
 import com.itwill.running.service.RedisService;
 import com.itwill.running.service.TMemberService;
 
@@ -44,6 +52,19 @@ public class ChatController {
 
 		model.addAttribute("teamId", teamId);
 		return "tchat/chattingroom";
+	}
+	
+	@PostMapping("teampage/api/chat")
+	public ResponseEntity<Long> saveMessage(@RequestParam("teamid") Integer teamId,@RequestBody ChatMessageDto dto) throws JsonProcessingException{
+		long result=redisService.saveMessage(teamId, dto);
+		return ResponseEntity.ok(result);
+	}
+	
+	@GetMapping("teampage/api/chat/getAll")
+	public ResponseEntity<List<ChatMessageDto>> getAll(@RequestParam("teamid") Integer teamId){
+		int count=100; //최근 메세지 100개만
+		List<ChatMessageDto> lists= redisService.getRecentMessage(teamId, count);
+		return ResponseEntity.ok(lists);
 	}
 	
 	
