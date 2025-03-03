@@ -5,6 +5,7 @@
 <div>Language - Java, Sql </br>
 Server - Tomcat  </br>
 DB - Oracle, Redis  </br>
+API - Rest API </br>
 IDE - Eclipse, SqlDeveloper  </br>
 Library - jakarta.servlet-api, jakarta.servlet.jsp.jstl-api, myBatis, JUnit, Log4j, HikariCP, Jackson Data Bind, commons-fileupload, javax.mail, etc </div>
 
