@@ -10,7 +10,7 @@ IDE - Eclipse, SqlDeveloper  </br>
 Library - jakarta.servlet-api, jakarta.servlet.jsp.jstl-api, myBatis, JUnit, Log4j, HikariCP, Jackson Data Bind, commons-fileupload, javax.mail, etc </div>
 
 
-<h3>✅ Core Features</h3>  </br>
+<h3>Core Features</h3>  </br>
 1️⃣ User Registration, Profile Update, and Deletion </br>
 -Sends an email verification link to the user's email upon registration. </br>
 -Users can select a profile image from a set of pre-provided options. </br>
@@ -38,7 +38,7 @@ Library - jakarta.servlet-api, jakarta.servlet.jsp.jstl-api, myBatis, JUnit, Log
 -If a comment with replies is deleted, only the content and user information are removed, while the comment remains. </br>
  </br>
  </br>
-<h3>✅ Additional Features</h3> </br>
+<h3>Additional Features</h3> </br>
 1️⃣ Current Seoul Weather  </br>
 -Retrieves daily Seoul weather data using the Free Weather API (https://www.weatherapi.com/). </br>
  </br>
